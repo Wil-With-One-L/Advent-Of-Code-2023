@@ -21,41 +21,34 @@ def createPairs(line):
     pairs.append(pair)
   return pairs
 
-red_max = 12
-green_max = 13
-blue_max = 14
-
 lines = cleanInput("Day 2/input.txt")
-
-print(createPairs(lines[0]))
 
 total = 0
 
 for i in range(0,100):
-  broken = False
+  red_max = 0
+  green_max = 0
+  blue_max = 0
+
   line = lines[i]
 
   pairs = createPairs(line)
   for pair in pairs:
     match pair[1]:
       case "red":
-        if pair[0] > red_max:
-          broken = True
-          break
+        red_max = max(pair[0], red_max)
       case "green":
-        if pair[0] > green_max:
-          broken = True
-          break
+        green_max = max(pair[0], green_max)
       case "blue":
-        if pair[0] > blue_max:
-          broken = True
-          break
+        blue_max = max(pair[0], blue_max)
   
-  if broken == False:
-    total += i + 1
+  power = red_max * green_max * blue_max
+  total += power
 
 print(total)
 
 # 4723 too high
 # 4649 too high
 # Part 1 - 2348
+
+# Part 2 - 76008
